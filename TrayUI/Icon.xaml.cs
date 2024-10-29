@@ -1,13 +1,6 @@
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace TrayUI
 {
@@ -39,10 +32,19 @@ namespace TrayUI
             uiMenu.Items.Clear();
         }
 
-        public void AddMenu(string key, Action action)
+        public void AddSimple(string key, Action action)
+        {
+            var item = new MenuItem();
+            item.Header = key;
+            item.Click += (s, e) => action();
+            uiMenu.Items.Add(item);
+        }
+
+        public void AddMenu(string key, object icon, Action action)
         {
             var item = new MenuItem();
             item.SetResourceReference(MenuItem.HeaderProperty, key);
+            item.Icon = icon;
             item.Click += (s, e) => action();
             uiMenu.Items.Add(item);
         }
