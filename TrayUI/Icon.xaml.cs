@@ -40,6 +40,14 @@ namespace TrayUI
             uiMenu.Items.Add(item);
         }
 
+        public void AddMenu(string key, Action action)
+        {
+            var item = new MenuItem();
+            item.SetResourceReference(MenuItem.HeaderProperty, key);
+            item.Click += (s, e) => action();
+            uiMenu.Items.Add(item);
+        }
+
         public void AddMenu(string key, object icon, Action action)
         {
             var item = new MenuItem();
